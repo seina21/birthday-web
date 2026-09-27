@@ -241,7 +241,7 @@ button:active {
 
 .photos {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin-top: 25px;
 }
@@ -254,8 +254,8 @@ button:active {
 
 .photo img {
     width: 100%;
-    height: 190px;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
     border-radius: 15px;
     display: block;
 }
@@ -375,10 +375,6 @@ input {
         gap: 10px;
     }
 
-    .photo img {
-        height: 150px;
-    }
-
     .memory-board {
         max-width: 330px;
         gap: 9px;
@@ -386,6 +382,73 @@ input {
 
     button {
         font-size: 15px;
+    }
+}
+    /* =========================
+   PUTAR HP KE LANDSCAPE
+========================= */
+
+#rotateMessage {
+    display: none;
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+    #rotateMessage {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+        padding: 25px;
+
+        background:
+            radial-gradient(
+                circle at 20% 20%,
+                rgba(255,180,215,.18),
+                transparent 30%
+            ),
+            linear-gradient(
+                135deg,
+                #100c22,
+                #24132f,
+                #391b3b
+            );
+
+        color: white;
+    }
+
+    #rotateMessage .rotate-icon {
+        font-size: 65px;
+        margin-bottom: 15px;
+        animation: rotatePhone 1.8s ease-in-out infinite;
+    }
+
+    #rotateMessage h2 {
+        color: #ffc8e1;
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    #rotateMessage p {
+        color: #f7eaf1;
+        font-size: 14px;
+        line-height: 1.7;
+    }
+}
+
+@keyframes rotatePhone {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
     }
 }
 </style>
@@ -439,8 +502,6 @@ input {
             <source src="golden hour violin.mp3" type="audio/mpeg">
         </audio>
     </div>
-
-</div>
 
 </div>
 
@@ -1047,6 +1108,27 @@ createHearts();
 startMemory();
 
 </script>
+<div id="rotateMessage">
+    <div class="rotate-icon">📱↪️</div>
 
+    <h2>Putar HP kamu ✨</h2>
+
+    <p>
+        Miringkan HP ke posisi landscape<br>
+        untuk membuka birthday surprise 💗
+    </p>
+</div>
+
+<script>
+window.addEventListener("load", async function () {
+    try {
+        if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock("landscape");
+        }
+    } catch (e) {
+        console.log("Browser tidak mengizinkan auto-rotate.");
+    }
+});
+</script>
 </body>
 </html>
