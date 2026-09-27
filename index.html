@@ -239,25 +239,37 @@ button:active {
    FOTO
 ========================= */
 
+/* =========================
+   FOTO - UKURAN ASLI
+========================= */
+
 .photos {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    column-count: 2;
+    column-gap: 15px;
     margin-top: 25px;
 }
 
 .photo {
+    width: 100%;
+    margin-bottom: 15px;
     padding: 7px;
     border-radius: 20px;
     background: rgba(255,255,255,.12);
+
+    /* supaya foto tidak terbelah */
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 .photo img {
     width: 100%;
     height: auto;
-    object-fit: contain;
-    border-radius: 15px;
     display: block;
+
+    /* TIDAK MEMOTONG FOTO */
+    object-fit: contain;
+
+    border-radius: 15px;
 }
 
 /* =========================
@@ -372,7 +384,20 @@ input {
     }
 
     .photos {
-        gap: 10px;
+        column-count: 2;
+        column-gap: 10px;
+    }
+
+    .photo {
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 16px;
+    }
+
+    .photo img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
     }
 
     .memory-board {
