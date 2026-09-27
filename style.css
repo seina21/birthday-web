@@ -306,17 +306,34 @@ button:disabled {
 }
 
 .photo-card {
+
     overflow: hidden;
+
     border-radius: 20px;
+
+    aspect-ratio: 1 / 1;
+
     background: rgba(255,255,255,.1);
+
 }
 
+
 .photo-card img {
+
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    display: block;
+
+    height: 100%;
+
+    object-fit: cover;
+
     transition: .5s;
+
+}
+
+.photo-card img:hover {
+
+    transform: scale(1.08);
+
 }
 
 .photo-card img:hover {
@@ -753,4 +770,23 @@ button {
             0 5px 25px rgba(255, 150, 200, .45);
     }
 
+}
+@media (max-width: 600px) {
+    .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .photo-card {
+        width: 100%;
+        height: auto !important;
+        aspect-ratio: 16 / 9 !important;
+        overflow: hidden;
+    }
+
+    .photo-card img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
 }
