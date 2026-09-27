@@ -292,56 +292,31 @@ button:disabled {
 /* =========================
    FOTO
 ========================= */
-
 .photo-grid {
-
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 15px;
-
     margin: 25px 0;
-
 }
 
 .photo-card {
-
     overflow: hidden;
-
     border-radius: 20px;
-
-    aspect-ratio: 1 / 1;
-
     background: rgba(255,255,255,.1);
-
+    aspect-ratio: auto;
 }
-
 
 .photo-card img {
-
     width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
+    height: auto;
+    display: block;
+    object-fit: contain;
     transition: .5s;
-
 }
 
 .photo-card img:hover {
-
-    transform: scale(1.08);
-
+    transform: scale(1.03);
 }
-
-.photo-card img:hover {
-
-    transform: scale(1.08);
-
-}
-
 
 /* =========================
    MUSIC
@@ -749,17 +724,15 @@ body::after {
 }
 
 
-/* TOMBOL BERKEDIP */
+/* =========================
+   TOMBOL BERKEDIP
+========================= */
 
 button {
-
-    animation:
-        buttonGlow 3s ease-in-out infinite;
-
+    animation: buttonGlow 3s ease-in-out infinite;
 }
 
 @keyframes buttonGlow {
-
     0%, 100% {
         box-shadow:
             0 5px 15px rgba(255, 150, 200, .15);
@@ -769,24 +742,75 @@ button {
         box-shadow:
             0 5px 25px rgba(255, 150, 200, .45);
     }
-
 }
-@media (max-width: 600px) {
-    .photo-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
+
+
+/* =========================
+   MODE LANDSCAPE HP
+========================= */
+
+#rotateMessage {
+    display: none;
+}
+
+@media screen and (max-width: 600px) and (orientation: portrait) {
+
+    #rotateMessage {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        text-align: center;
+        padding: 25px;
+
+        background:
+            radial-gradient(
+                circle at 20% 20%,
+                rgba(255,255,255,.2),
+                transparent 30%
+            ),
+            linear-gradient(
+                135deg,
+                #180d25,
+                #3d173d,
+                #6d315e
+            );
+
+        color: white;
     }
 
-    .photo-card {
-        width: 100%;
-        height: auto !important;
-        aspect-ratio: 16 / 9 !important;
+    #rotateMessage .rotate-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+        animation: rotatePhone 1.8s ease-in-out infinite;
+    }
+
+    #rotateMessage h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+
+    #rotateMessage p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    body {
         overflow: hidden;
     }
+}
 
-    .photo-card img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: contain !important;
+@keyframes rotatePhone {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(90deg);
     }
 }
